@@ -84,7 +84,7 @@ with col3:
     st.number_input("Initial  ", key="luck_init", min_value=0)
     st.number_input("Current  ", key="luck_curr", min_value=0)
 
-st.checkbox("LIBRA CALL", value=True, key="libra_call")
+st.checkbox("LIBRA CALL", key="libra_call")
 
 col4, col5 = st.columns(2)
 with col4:
