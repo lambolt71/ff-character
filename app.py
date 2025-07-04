@@ -5,6 +5,7 @@ st.set_page_config(page_title="Fighting Fantasy Character Sheet", layout="center
 
 st.title("🗡️ Fighting Fantasy Character Sheet")
 
+# Utility functions
 def roll_d6(n):
     return sorted([random.randint(1, 6) for _ in range(n)])
 
@@ -23,12 +24,12 @@ def generate_stats(char_class):
 
     return skill, stamina, luck
 
-# Session state defaults
+# --- Initialize session state ---
 if "name" not in st.session_state:
     st.session_state.update({
         "name": "",
         "quest": "",
-        "class": "Wizard",
+        "char_class": "Wizard",  # Renamed from "class"
         "skill_init": 0,
         "skill_curr": 0,
         "stamina_init": 0,
@@ -43,6 +44,7 @@ if "name" not in st.session_state:
         "lost_used": "",
     })
 
+# --- Reset and Generate function ---
 def reset_and_generate():
     st.session_state.name = ""
     st.session_state.quest = ""
@@ -53,7 +55,7 @@ def reset_and_generate():
     st.session_state.provisions = 0
     st.session_state.gold = 0
 
-    skill, stamina, luck = generate_stats(st.session_state.class)
+    skill, stamina, luck = generate_stats(st.session_state.char_class)
     st.session_state.skill_init = skill
     st.session_state.skill_curr = skill
     st.session_state.stamina_init = stamina
@@ -66,7 +68,7 @@ def reset_and_generate():
 st.text_input("Name", key="name")
 st.text_input("Quest", key="quest")
 
-st.selectbox("Class", ["Wizard", "Warrior"], key="class")
+st.selectbox("Class", ["Wizard", "Warrior"], key="char_class")
 
 col1, col2, col3 = st.columns(3)
 with col1:
